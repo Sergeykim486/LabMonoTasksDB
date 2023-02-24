@@ -17,9 +17,9 @@ class AccessDB:
         columns = ', '.join(values_dict.keys())
         placeholders = ', '.join('?' * len(values_dict))
         values = tuple(values_dict.values())
-        cursor = self.conn.execute(f"SELECT MAX(code) FROM {table_name}")
+        cursor = self.conn.execute(f"SELECT MAX(id) FROM {table_name}")
         max_code = cursor.fetchone()[0] or 0
-        values_dict["code"] = max_code + 1
+        values_dict["id"] = max_code + 1
         sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
         self.conn.execute(sql, values)
         self.conn.commit()
